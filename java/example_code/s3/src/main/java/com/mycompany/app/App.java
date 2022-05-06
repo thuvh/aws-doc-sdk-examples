@@ -28,11 +28,13 @@
 package com.mycompany.app;
 
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
+import com.amazonaws.util.AwsHostNameUtils;
 
 import java.util.List;
 
@@ -41,20 +43,24 @@ public class App {
     private static AmazonS3 s3;
 
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.out.format("Usage: <the bucket name> <the AWS Region to use>\n" +
-                    "Example: my-test-bucket us-east-2\n");
-            return;
-        }
+//        if (args.length < 2) {
+//            System.out.format("Usage: <the bucket name> <the AWS Region to use>\n" +
+//                    "Example: my-test-bucket us-east-2\n");
+//            return;
+//        }
 
-        String bucket_name = args[0];
-        String region = args[1];
-
+        String bucket_name = "java-test-02";
+//        String region = args[1];
+        String region = "sgn09";
+        String endpoint = "https://s3-sgn09.fptcloud.com";
+//        s3 = AmazonS3ClientBuilder.standard()
+//                .withCredentials(new ProfileCredentialsProvider())
+//                .withRegion(region)
+//                .build();
         s3 = AmazonS3ClientBuilder.standard()
                 .withCredentials(new ProfileCredentialsProvider())
-                .withRegion(region)
-                .build();
-
+                        .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, region))
+                                .build();
         // List current buckets.
         ListMyBuckets();
 

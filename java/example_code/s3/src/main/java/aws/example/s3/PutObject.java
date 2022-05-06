@@ -24,6 +24,8 @@
 package aws.example.s3;
 
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -55,7 +57,16 @@ public class PutObject {
         String key_name = Paths.get(file_path).getFileName().toString();
 
         System.out.format("Uploading %s to S3 bucket %s...\n", file_path, bucket_name);
-        final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.DEFAULT_REGION).build();
+
+//        String region = args[1];
+        String region = "sgn09";
+        String endpoint = "https://s3-sgn09.fptcloud.com";
+//
+        final AmazonS3 s3 = AmazonS3ClientBuilder.standard()
+                .withCredentials(new ProfileCredentialsProvider())
+                .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, region))
+                .build();
+
         try {
             s3.putObject(bucket_name, key_name, new File(file_path));
         } catch (AmazonServiceException e) {

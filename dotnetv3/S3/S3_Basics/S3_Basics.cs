@@ -25,7 +25,10 @@ namespace S3_BasicsScenario
             // default user installed on the system. To work with Amazon S3
             // features in a different AWS Region, pass the AWS Region as a
             // parameter to the client constructor.
-            IAmazonS3 client = new AmazonS3Client();
+            AmazonS3Config config = new AmazonS3Config();
+            config.ForcePathStyle = true;
+            config.ServiceURL = "https://s3-sgn09.fptcloud.com";
+            IAmazonS3 client = new AmazonS3Client(config);
             string bucketName = string.Empty;
             string filePath = string.Empty;
             string keyName = string.Empty;

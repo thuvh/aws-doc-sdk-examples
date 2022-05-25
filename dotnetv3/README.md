@@ -27,6 +27,21 @@ Developer Guide](https://docs.aws.amazon.com/sdk-for-net/latest/developer-guide/
 setting the AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables.
 For more information, see the [AWS Tools and SDKs Shared Configuration and Credentials Reference Guide](https://docs.aws.amazon.com/credref/latest/refdocs/overview.html).
 
+## FPT Smart Cloud 
+- Mo `cmd`, 
+- Tao thu muc ".aws" trong thu muc `C:\Users\<user>` bang cau lenh `mkdir .aws` 
+- Tao tep tin `config` cho viec xac thuc `C:\Users\<user>\.aws\config`
+```
+[default]
+region=sgn09
+```
+- Tao tep tin `credentials` cho viec xac thuc `C:\Users\<user>\.aws\credentials`
+```
+[default]
+aws_access_key_id=<change me plz>
+aws_secret_access_key=<change me plz>
+```
+
 ## Building and running the code examples
 
 To build and run a code example, 
